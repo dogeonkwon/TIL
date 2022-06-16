@@ -1,10 +1,11 @@
 import sys
 
+
 n = int(sys.stdin.readline())
 for _ in range(n):
     balance = 0
     bracket = sys.stdin.readline()
-    print(bracket)
+    
     if bracket[-1] == '(' or bracket[0] == ')':
         print('NO')
         break
