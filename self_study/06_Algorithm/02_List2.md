@@ -25,7 +25,7 @@
 
  ex ) arr = [ [0,1,2,3], [4,5,6,7] ]
 
-![image-20220211212555839](C:\Users\kjmk1\AppData\Roaming\Typora\typora-user-images\image-20220211212555839.png)
+![image-20220211212555839](C:\Users\kjmk1\OneDrive\바탕 화면\Github\self_study\06_Algorithm\List2.assets\image-20220211212555839.png)
 
 
 
