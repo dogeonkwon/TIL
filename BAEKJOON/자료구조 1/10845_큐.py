@@ -1,6 +1,11 @@
 import sys
 import collections
 
+# from collections import deque 은 안되고
+
+# import collections
+# collections.deque 이런식으로는 사용 가능
+
 queue = collections.deque()
 
 n = int(sys.stdin.readline())
