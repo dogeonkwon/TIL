@@ -1,4 +1,5 @@
 import sys
+# collections.Counter 를 이용해 풀이도 가능
 
 n = int(sys.stdin.readline())
 arr = list(map(int, sys.stdin.readline().split()))
