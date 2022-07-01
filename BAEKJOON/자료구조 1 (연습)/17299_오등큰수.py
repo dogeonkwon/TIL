@@ -35,4 +35,5 @@ else:
                     ans[k[0]] = lst[i+1]
                 else:
                     break
+
     print(*ans)
