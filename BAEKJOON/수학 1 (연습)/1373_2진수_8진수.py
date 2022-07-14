@@ -2,6 +2,7 @@ import sys
 
 n = sys.stdin.readline().strip()
 
+
 k = len(n)-1
 num = 0
 s = ((k // 3) + 1)
