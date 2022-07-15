@@ -15,6 +15,7 @@ for i in n:
             ans[k//3] += 2**k
     k -= 1
 
+
 res = ''
 for j in ans[::-1]:
     res += str(j)
