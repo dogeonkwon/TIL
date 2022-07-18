@@ -1,22 +1,17 @@
 import sys
 
-n = sys.stdin.readline().strip()
+two = sys.stdin.readline().strip()[::-1]
 
+ans = ''
 
-k = len(n)-1
-num = 0
-s = ((k // 3) + 1)
-ans = [0] * s
-for i in n:
-    if i == '1':
-        if k >= 3:
-            ans[k//3] += (k % 3) + 1
-        else:
-            ans[k//3] += 2**k
-    k -= 1
+for i in range(0, len(two), 3):
+    tmp = two[i:i+3]
+    if len(tmp) == 2:
+        tmp += '0'
+    elif len(tmp) == 1:
+        tmp += '00'
 
+    res = int(tmp[0]) * 1 + int(tmp[1]) * 2 + int(tmp[2]) * 4
+    ans += str(res)
 
-res = ''
-for j in ans[::-1]:
-    res += str(j)
-print(res)
+print(ans[::-1])
