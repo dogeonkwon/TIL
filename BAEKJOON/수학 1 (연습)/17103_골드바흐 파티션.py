@@ -1,28 +1,25 @@
 import sys
 
-tc = int(sys.stdin.readline())
+tc = int(sys.stdin.readline().strip())
 
 nums = [0] * tc
-maxN = 0
+maxNum = 4
 for l in range(tc):
-    k = int(sys.stdin.readline())
-    nums[l] = k
+    nums[l] = int(sys.stdin.readline().strip())
 
-    if maxN < k:
-        maxN = k
+    if maxNum < nums[l]:
+        maxNum = nums[l]
 
-prime = [True] * (maxN + 1)
-prime[1] = False
+prime = [True] * (maxNum + 1)
 
-for i in range(2, int(maxN ** 0.5) + 1):
+for i in range(2, int(maxNum**0.5 + 1)):
     if prime[i]:
-        for j in range(i + i, maxN + 1, i):
+        for j in range(i+i, maxNum + 1, i):
             prime[j] = False
 
 for n in nums:
     ans = 0
-    for m in range(2, n // 2 + 1):
-        if prime[m] and prime[n - m]:
+    for m in range(2, n//2 + 1):
+        if prime[m] and prime[n-m]:
             ans += 1
-
     print(ans)
