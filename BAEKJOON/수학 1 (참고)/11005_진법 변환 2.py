@@ -8,10 +8,18 @@ res = ''
 # 이 때 10 이상의 수들은 알파벳으로 바꿔 준다.
 # 런타임 에러 나옴...
 
-while N > B:
-    k = N % B
-    if k > 9:
-        k = chr(k+55)
-    res += k
+# while N > B:
+#     k = N % B
+#     if k > 9:
+#         k = chr(k+55)
+#     res += k
+#     N //= B
+# print(res)
+
+
+table = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+while N != 0:
+    res += table[N % B]
     N //= B
-print(res)
+print(res[::-1])
