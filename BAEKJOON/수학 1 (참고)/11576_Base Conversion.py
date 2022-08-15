@@ -10,3 +10,4 @@ m = int(sys.stdin.readline())
 lst = list()
 for _ in range(m):
     lst.append(int(sys.stdin.readline()))
+
