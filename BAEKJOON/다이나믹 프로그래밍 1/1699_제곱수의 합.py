@@ -1,50 +1,45 @@
 import sys
 
-def dp(num, cnt, s, ans):
-    global res
-
-    if cnt == 1:
-        if n == s:
-            res = ans
-    else:
-        for k in range(int(num**0.5), 0, -1):
-            if res:
-                break
-            dp(num-(k**2), cnt-1, s+(k**2), ans)
-
-
 n = int(sys.stdin.readline())
-res = 0
 
-if n == int(n**0.5) ** 2:
-    res = 1
-else:
-    for i in range(2, n):
-        if res:
+dp = [m for m in range(n+1)]
+
+for i in range(1, n+1):
+    tmp = []
+    for j in range(1, i):
+        if j*j > i:
             break
-        for j in range(int(n**0.5), 0, -1):
-            if res:
-                break
-            else:
-                m = j**2
-                dp(n-m, i, m, i)
+        tmp.append(dp[i-j*j])
+    if tmp:
+        dp[i] = min(tmp) + 1
 
-print(res)
+print(dp[n])
 
 
-
-
-
-
-# import sys
+# 0 - (0개)
+# 1 - 1 ^ 2 (1개)
+# 2 - 1 ^ 2 + 1 ^ 2 (2개)
+# 3 - 1 ^ 2 + 1 ^ 2 + 1 ^ 2 (3개)
+# 4 - 2 ^ 2 (1개)
+# 5 - 2 ^ 2 + 1 ^ 2 (2개)
+# 6 - 2 ^ 2 + 1 ^ 2 + 1 ^ 2 (3개)
+# 7 - 2 ^ 2 + 1 ^ 2 + 1 ^ 2 + 1 ^ 2 (4개)
+# 8 - 2 ^ 2 + 2 ^ 2 (2개)
+# 9 - 3 ^ 2 (1개)
+# 10 - 3 ^ 2 + 1 ^ 2 (2개)
+# 11 - 3 ^ 2 + 1 ^ 2 + 1 ^ 2 (3개)
+# 12 - 2 ^ 2 + 2 ^ 2 + 2 ^ 2 (3개)
+# 13 - 3 ^ 2 + 2 ^ 2 (2개)
+# 14 - 3 ^ 2 + 2 ^ 2 + 1 ^ 2 (3개)
+# 15 - 3 ^ 2 + 2 ^ 2 + 1 ^ 2 + 1 ^ 2 (4개)
+# 16 - 4 ^ 2 (1개)
 #
-# n = int(sys.stdin.readline())
-# res = 0
+# dp에는 이 개수들을 담아준다.
 #
-# while n >= 1:
-#     print('##', n**0.5)
-#     print(int(n**0.5)**2)
-#     n -= int(n**0.5)**2
-#     res += 1
+# 점화식은 i가 숫자, j가 i보다 작거나 같은 제곱수들이라고 했을때,
 #
-# print(res)
+# dp[i] = min(dp[i - j]) + 1 이 될 수 있다.
+#
+# 예를 들어 i가 16 이라고 했을때 i보다 작거나 같은 제곱수는 1, 4, 9, 16 이다.
+#
+# dp[i - 1], dp[i - 4], dp[i - 9], dp[i - 16] 중 가장 작은 값은 0 이고 여기에 1 을 더한 값을 dp[i] 에 넣어준다.
