@@ -6,6 +6,7 @@ n = str(sys.stdin.readline().strip())
 m = int(sys.stdin.readline().strip())
 arr = [1] * 10
 if m:
+
     broken = list(map(int, sys.stdin.readline().strip().split()))
     for i in broken:
         arr[i] = 0
