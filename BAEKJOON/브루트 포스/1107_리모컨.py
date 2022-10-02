@@ -1,51 +1,20 @@
 import sys
 
-input = sys.stdin.readline
+n = int(sys.stdin.readline())
+m = int(sys.stdin.readline())
+break_num = list(map(int, sys.stdin.readline().split()))
 
-n = str(sys.stdin.readline().strip())
-m = int(sys.stdin.readline().strip())
-arr = [1] * 10
-if m:
+# +, -만 했을 때
+res = abs(100-n)
 
-    broken = list(map(int, sys.stdin.readline().strip().split()))
-    for i in broken:
-        arr[i] = 0
-
-up_down = 0
-tmp = ''
-for i in n:
-    s = 20
-    plus = 0
-    if up_down == 0:
-        for j in range(10):
-            if arr[j]:
-                absolute_number = abs(int(i) - j)
-                if s >= absolute_number:
-                    s = absolute_number
-                    plus = str(j)
-        if plus:
-            if int(plus) > int(i):
-                up_down = 2
-            elif int(plus) < int(i):
-                up_down = 1
-
-    elif up_down == 1:
-        for j in range(9, -1, -1):
-            if arr[j]:
-                plus = str(j)
-                break
-
-    else:
-        for j in range(10):
-            if arr[j]:
-                plus = str(j)
-                break
-    if plus:
-        tmp += plus
-
-res = abs(int(n) - int(tmp)) + len(n)
-
-if abs(int(n)-100) >= res:
-    print(res)
-else:
-    print(abs(int(n)-100))
+# 500,000까지 범위인데 1,000,001까지 한 이유는
+# 999,999까지도 고려해야 하기 때문 (여기서 하나씩 내려가는게 더 빠를 수 있음)
+for i in range(1000001):
+    num = str(i)
+    # 각 자리 숫자가 고장난 번호에 포함되지 않는다면 더 작은 더 작은지 비교
+    for j in range(len(num)):
+        if int(num[j]) in break_num:
+            break
+        elif j == len(num) - 1:
+            res = min(res, abs(i - n) + len(num))
+print(res)
