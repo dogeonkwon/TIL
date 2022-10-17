@@ -8,4 +8,3 @@ res = sorted(set(list(itertools.combinations(arr, m))))
 
 for i in res:
     print(*i)
-    
