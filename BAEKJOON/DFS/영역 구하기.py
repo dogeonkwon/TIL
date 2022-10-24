@@ -1,27 +1,21 @@
-import sys
-
-def dfs(a, b, c, d):
-    global res
-
-    for x, y in (0, 1), (-1, 0):
-        xx = a + x
-        yy = b + y
-        if c <= xx <= a and b <= yy <= d:
-            res[xx][yy] = 1
-            dfs(xx, yy, c, d)
+import sys, collections
 
 
-def dfs2(x, y):
+def bfs(x, y):
     global sub
 
-    for i, j in (0, 1), (1, 0), (0, -1), (-1, 0):
-        xx = x + i
-        yy = y + j
-        if 0 <= xx < m and 0 <= yy < n:
-            if not res[xx][yy]:
-                res[xx][yy] = 1
-                sub += 1
-                dfs2(xx, yy)
+    q = collections.deque([[x, y]])
+
+    while q:
+        v = q.popleft()
+        for i, j in (0, 1), (1, 0), (0, -1), (-1, 0):
+            xx = v[0] + i
+            yy = v[1] + j
+            if 0 <= xx < m and 0 <= yy < n:
+                if not res[xx][yy]:
+                    res[xx][yy] = 1
+                    sub += 1
+                    q.append([xx, yy])
 
 
 m, n, k = map(int, sys.stdin.readline().split())
@@ -30,22 +24,22 @@ res = [[0 for _ in range(n)] for _ in range(m)]
 
 ans = list()
 
+# 빈칸 색칠
 for _ in range(k):
     coordinate = list(map(int, sys.stdin.readline().split()))
-    a = m - coordinate[1] - 1
-    b = coordinate[0]
-    c = m - coordinate[3]
-    d = coordinate[2] - 1
-    res[a][b] = 1
-    dfs(a, b, c, d)
+    for i in range(m-coordinate[3], m-coordinate[1]):
+        for j in range(coordinate[0], coordinate[2]):
+            res[i][j] = 1
 
+# 색칠안된 빈칸 구하기
 for i in range(m):
     for j in range(n):
         if not res[i][j]:
             sub = 1
             res[i][j] = 1
-            dfs2(i, j)
+            bfs(i, j)
             ans.append(sub)
 
+ans.sort()
 print(len(ans))
-print(sorted(ans))
+print(*ans)
