@@ -5,7 +5,7 @@ def solution(str1, str2):
     answer = 0
     intersection = 0  # 교집합
     union = 0  # 합집합
-    arr1 = []
+    dict1 = []
     n = len(str1)
     m = len(str2)
 
