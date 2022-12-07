@@ -7,19 +7,18 @@ def solution(msg):
 
     n = len(msg)
     m = 0
+    tmp = msg[0]
 
-    while m < n - 1:
-        tmp = msg[m]
-        s = m
-        while m < n - 1:
+    while m < n:
+        if tmp in idx:
             m += 1
-            tmp += msg[m]
-            if tmp not in idx:
-                idx[tmp] = len(idx) + 1
-                break
+            if m < n:
+                tmp += msg[m]
+        else:
+            idx[tmp] = len(idx) + 1
+            answer.append(idx[tmp[0:len(tmp) - 1]])
+            tmp = msg[m]
 
-        answer.append(idx[msg[s:m]])
-
-    answer.append(idx[msg[m]])
+    answer.append(idx[tmp])
 
     return answer
