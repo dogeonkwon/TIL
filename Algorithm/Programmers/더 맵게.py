@@ -1,14 +1,17 @@
+import heapq
+
 def solution(scoville, K):
     answer = 0
-    scoville.sort(reverse=True)
-    n = len(scoville)
+    heapq.heapify(scoville)
 
-    while scoville:
-        if scoville[-1] >= K:
+    while len(scoville) >= 2:
+        if scoville[0] >= K:
             break
         answer += 1
-        tmp = scoville.pop() + scoville.pop() * 2
-        scoville.append(tmp)
-        scoville.sort(reverse=True)
+        tmp = heapq.heappop(scoville) + heapq.heappop(scoville) * 2
+        heapq.heappush(scoville, tmp)
+
+    if scoville[0] < K:
+        answer = -1
 
     return answer
